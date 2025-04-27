@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Exam Reminder</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        
+        /* Base styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .email-header {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0f8ff 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            max-width: 120px;
+            margin: 0 auto;
+        }
+        
+        .email-body {
+            padding: 30px;
+        }
+        
+        .email-footer {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0f8ff 100%);
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+        }
+        
+        h1 {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            margin-top: 0;
+            font-weight: 600;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #0057ff;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .countdown-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .countdown-item {
+            background: linear-gradient(135deg, #0057ff 0%, #00c6ff 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 15px 10px;
+            min-width: 80px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .countdown-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            margin: 5px 0 0;
+        }
+        
+        .exam-details {
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .exam-details h3 {
+            margin-top: 0;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .checklist {
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .checklist-icon {
+            color: #0057ff;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 15px 0;
+            background: linear-gradient(to right, #00c6ff, #0057ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #f5f5f5;
+            }
+            
+            .email-container {
+                background-color: #1e1e1e;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            .email-header, .email-footer {
+                background: linear-gradient(135deg, #001a33 0%, #002952 100%);
+            }
+            
+            .exam-details {
+                background-color: #001a33;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                color: #f5f5f5;
+            }
+            
+            .checklist {
+                background-color: #001a33;
+                color: #f5f5f5;
+            }
+            
+            .checklist-icon {
+                color: #00c6ff;
+            }
+            
+            a {
+                color: #00c6ff;
+            }
+        }
+        
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100%;
+                border-radius: 0;
+            }
+            
+            .email-body {
+                padding: 20px;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="logo">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-krHTZOCyHkRtTM9oZedCk1BjiHJmuq.png" alt="ExamBazz Logo" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="tagline">Assess Smarter, Teach Better</div>
+        </div>
+        
+        <div class="email-body">
+            <h1>Upcoming Exam Reminder</h1>
+            <p>Dear OmukTomuk Edtech,</p>
+            <p>This is a friendly reminder about the upcoming exam you've scheduled on the ExamBazz platform.</p>
+            
+            <div class="countdown-container">
+                <h3 class="gradient-text">Exam Starts In</h3>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <p class="countdown-value">7</p>
+                        <p class="countdown-label">Days</p>
+                    </div>
+                    <div class="countdown-item">
+                        <p class="countdown-value">12</p>
+                        <p class="countdown-label">Hours</p>
+                    </div>
+                    <div class="countdown-item">
+                        <p class="countdown-value">45</p>
+                        <p class="countdown-label">Minutes</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exam-details">
+                <h3>Exam Details</h3>
+                <p><strong>Exam Name:</strong> [Exam Name]<br>
+                <strong>Date:</strong> [Exam Date]<br>
+                <strong>Time:</strong> [Exam Time]<br>
+                <strong>Duration:</strong> [Exam Duration]<br>
+                <strong>Number of Questions:</strong> [Number]<br>
+                <strong>Total Participants:</strong> [Number] students</p>
+            </div>
+            
+            <p>To ensure a smooth exam experience for your students, please review the pre-exam checklist:</p>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Verify all exam questions and settings</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Ensure all students have received their login credentials</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Check that the exam time window is correctly configured</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Review proctoring settings if applicable</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="checklist-icon">✓</span>
+                    <span>Test the exam on different devices to ensure compatibility</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="cta-button">Review Exam Settings</a>
+            </div>
+            
+            <p>Need to make changes to your exam? You can edit the exam settings up to 24 hours before the scheduled start time.</p>
+            
+            <p>If you have any questions or need assistance, please contact our support team at <a href="mailto:support@exambazz.com">support@exambazz.com</a>.</p>
+            
+            <p>Best regards,<br>The ExamBazz Team</p>
+        </div>
+        
+        <div class="email-footer">
+            <p>&copy; 2025 ExamBazz. All rights reserved.</p>
+            <p><a href="https://exambazz.com/" style="color: #0057ff; text-decoration: none;">https://exambazz.com/</a></p>
+        </div>
+    </div>
+</body>
+</html>
